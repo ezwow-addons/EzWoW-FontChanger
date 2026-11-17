@@ -703,6 +703,8 @@ function SettingsDialog.build()
     if configFrame then return configFrame end
 
     configFrame = CreateFrame("Frame", "EzWoWFontChangerSettings", UIParent, "BackdropTemplate")
+    -- (taller than the screen: shrunk to fit, Libs/EzWoWGamePad)
+    if ns.GamePad and ns.GamePad.KeepOnScreen then ns.GamePad.KeepOnScreen(configFrame) end
     SettingsDialog.configFrame = configFrame
     configFrame:SetSize(WINDOW_WIDTH, 546 + (#ns.TARGET_ORDER - 4) * BLOCK_HEIGHT)
     configFrame:SetPoint("CENTER")
