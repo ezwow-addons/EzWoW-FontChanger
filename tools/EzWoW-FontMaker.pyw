@@ -495,18 +495,27 @@ def save_settings(data):
     APP_DIR.mkdir(parents=True, exist_ok=True)
     SETTINGS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
-def guess_myfonts_folder():
-    roots = [Path(os.environ.get("ProgramFiles(x86)", "C:/Program Files (x86)")), Path(os.environ.get("ProgramFiles", "C:/Program Files")),
-             Path("C:/"), Path("D:/")]
+def guess_myfonts_folder(roots=None):
+    # WoW Forever (_forever_) first; otherwise the game folder whose Font Changer was updated last.
+    # (Taking the first folder by name picked an old beta folder such as _classic_beta_.)
+    if roots is None:
+        roots = [Path(os.environ.get("ProgramFiles(x86)", "C:/Program Files (x86)")), Path(os.environ.get("ProgramFiles", "C:/Program Files")),
+                 Path("C:/"), Path("D:/")]
+    found = []
     for root in roots:
-        wow = root / "World of Warcraft"
-        if not wow.exists():
+        wow = Path(root) / "World of Warcraft"
+        if not wow.is_dir():
             continue
-        for flavor in sorted(wow.iterdir()):
+        for flavor in wow.iterdir():
             addons = flavor / "Interface" / "AddOns"
-            if (addons / "EzWoW-FontChanger").exists():
-                return str(addons / "EzWoW-MyFonts")
-    return ""
+            changer = addons / "EzWoW-FontChanger"
+            if changer.is_dir():
+                try:
+                    updated = changer.stat().st_mtime
+                except OSError:
+                    updated = 0
+                found.append((0 if flavor.name.lower() == "_forever_" else 1, -updated, str(addons / "EzWoW-MyFonts")))
+    return min(found)[2] if found else ""
 
 # --------------------------------------------------------------------------
 # GUI
@@ -597,7 +606,7 @@ class FontMakerApp:
         self.out_var = tk.StringVar(value=self.settings.get("out_dir") or guess_myfonts_folder() or str(Path.home() / "Desktop"))
         ttk.Entry(out, textvariable=self.out_var).grid(row=1, column=1, sticky="we", padx=4, pady=(4, 0))
         ttk.Button(out, text="찾기", width=6, command=self.choose_out_dir).grid(row=1, column=2, pady=(4, 0))
-        ttk.Label(out, text="와우의 Interface\\AddOns\\EzWoW-MyFonts 폴더로 고르면 Font Changer가 바로 인식합니다 (게임 재시작).",
+        ttk.Label(out, text="World of Warcraft\\_forever_\\Interface\\AddOns\\EzWoW-MyFonts 폴더로 고르면 Font Changer가 바로 인식합니다 (게임 재시작).",
                   foreground="#666", wraplength=430).grid(row=2, column=0, columnspan=3, sticky="w", pady=(4, 0))
         buttons = ttk.Frame(out)
         buttons.grid(row=3, column=0, columnspan=3, sticky="we", pady=(8, 0))
@@ -706,7 +715,7 @@ class FontMakerApp:
         self.mode_label.configure(text="설정이 바뀌었어요. [미리보기]를 다시 누르세요.")
 
     def choose_out_dir(self):
-        folder = filedialog.askdirectory(title="저장 폴더 (예: ...\\Interface\\AddOns\\EzWoW-MyFonts)")
+        folder = filedialog.askdirectory(title="저장 폴더 (예: ...\\World of Warcraft\\_forever_\\Interface\\AddOns\\EzWoW-MyFonts)")
         if folder:
             self.out_var.set(folder)
 

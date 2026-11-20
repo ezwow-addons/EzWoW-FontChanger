@@ -7,7 +7,7 @@ that tells Font Changer which files are there:
     EzWoW-MyFonts/MyFonts.lua
 
 Usage (run again after adding or removing fonts, then restart the game):
-    python make_myfonts.py "C:\\Program Files (x86)\\World of Warcraft\\_classic_\\Interface\\AddOns\\EzWoW-MyFonts"
+    python make_myfonts.py "C:\\Program Files (x86)\\World of Warcraft\\_forever_\\Interface\\AddOns\\EzWoW-MyFonts"
 """
 import sys
 from pathlib import Path

@@ -81,7 +81,7 @@ WoW Forever (`Interface: 16001`) · `v1.0.3` · `/ezfont`
 
 #### 내 글꼴 추가
 
-내 글꼴은 `Interface/AddOns/EzWoW-MyFonts/` 폴더에 넣습니다. 이 애드온 폴더 밖이라 업데이트해도 지워지지 않습니다. 와우 애드온은 폴더 안 파일 목록을 읽을 수 없어서, 아래 세 방법 중 하나로 인식시킵니다. 어느 방법이든 파일을 넣은 뒤 **게임을 다시 켜야** 합니다.
+내 글꼴은 `_forever_/Interface/AddOns/EzWoW-MyFonts/` 폴더에 넣습니다. 이 애드온 폴더 밖이라 업데이트해도 지워지지 않습니다. 와우 애드온은 폴더 안 파일 목록을 읽을 수 없어서, 아래 세 방법 중 하나로 인식시킵니다. 어느 방법이든 파일을 넣은 뒤 **게임을 다시 켜야** 합니다.
 
 1. **이름 바꾸기 (가장 쉬움)**: 파일 이름을 `font1.ttf` ~ `font30.ttf`로 바꾸면 자동으로 인식됩니다.
 2. **목록 만들기 (원래 이름 그대로)**: 저장소의 `tools/make_myfonts.ps1`을 그 폴더에 넣고 *PowerShell로 실행* 합니다. 파이썬이 있다면 `tools/make_myfonts.py <폴더>`도 됩니다. 폴더 안 모든 `.ttf`/`.otf`가 목록에 들어가고, 글꼴을 바꿀 때마다 다시 실행하면 됩니다.
@@ -97,7 +97,7 @@ WoW Forever (`Interface: 16001`) · `v1.0.3` · `/ezfont`
 - **저작권 안전장치**: OFL 라이선스가 확인된 글꼴만 받아들이고, 재료 글꼴의 예약 이름(Reserved Font Name)이 들어간 이름으로는 저장하지 않으며, 원본 저작권 표기를 글꼴 안과 `-LICENSE.txt` 파일에 자동으로 넣습니다.
 - 고른 글꼴에 없는 글자는 같은 굵기의 Noto로 채워 네모(□)가 생기지 않습니다.
 - **언어별 테스트**: 만들기 전에는 고른 글꼴로, 만든 뒤에는 결과 글꼴로 언어마다 그려 보고 "모두 표시 / 없음 N자"를 보여 줍니다. 직접 입력한 글자도 확인할 수 있습니다.
-- 저장 폴더를 `Interface/AddOns/EzWoW-MyFonts`로 고르면 목록 파일까지 만들어 Font Changer가 게임 재시작 후 바로 인식합니다.
+- 저장 폴더를 `_forever_/Interface/AddOns/EzWoW-MyFonts`로 고르면 목록 파일까지 만들어 Font Changer가 게임 재시작 후 바로 인식합니다.
 
 ### 업데이트 후 꼭: 게임 완전 재시작
 
@@ -154,7 +154,7 @@ Bundled fonts (modified SIL OFL 1.1 fonts, built by `scripts/build_fonts.py`; se
 
 - **Per-language mix**: pick a font for each alphabet (Latin, Korean, Simplified / Traditional Chinese, Russian), then choose *Per-language mix* as an area's font. The game draws each character with the font for its language (`CreateFontFamily`). *Stop broken letters in every area* sets chat and UI to the mix and names above heads to EzWoW World Sans in one click. Names above heads and combat numbers can use only one font file, so they use EzWoW World Sans instead of the mix.
 - **Font test**: draws Korean, Latin, Russian, Greek, Chinese, Japanese and symbol samples with the chosen area's font and reports *All shown / Partly / Missing* for each; click the area button to switch areas and type a name to check it.
-- **Add my font**: put `.ttf` files in `Interface/AddOns/EzWoW-MyFonts/` (outside this addon, so updates never delete them) and restart the game. Files named `font1.ttf`–`font30.ttf` and files listed by `tools/make_myfonts.ps1` / `tools/make_myfonts.py` are found automatically (marked *auto*); other names can be typed in and removed again. Fonts that other addons register in the common font list are listed too, and the 22 bundled fonts are registered there as well.
+- **Add my font**: put `.ttf` files in `_forever_/Interface/AddOns/EzWoW-MyFonts/` (outside this addon, so updates never delete them) and restart the game. Files named `font1.ttf`–`font30.ttf` and files listed by `tools/make_myfonts.ps1` / `tools/make_myfonts.py` are found automatically (marked *auto*); other names can be typed in and removed again. Fonts that other addons register in the common font list are listed too, and the 22 bundled fonts are registered there as well.
 
 **Make your own font**: `tools/EzWoW-FontMaker.pyw` (Python 3) merges free fonts picked per alphabet into one `.ttf`, accepts only OFL-licensed fonts, keeps the original copyright notices, fills missing letters from Noto and can save straight into `EzWoW-MyFonts`.
 

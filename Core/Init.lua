@@ -13,6 +13,9 @@ ns.FONT_PATH = ns.ADDON_PATH .. "Fonts\\"
 -- Folder for the player's own font files. It sits outside this addon's folder
 -- so addon updates (which replace the whole folder) never delete them.
 ns.CUSTOM_FONT_DIR = "Interface\\AddOns\\EzWoW-MyFonts\\"
+-- The game's paths start in the WoW Forever folder; shown in front of them in messages
+-- (players put fonts in another game folder, such as an old beta one).
+ns.GAME_FOLDER = "_forever_\\"
 ns.DONATE_URL = "https://buymeacoffee.com/qqhrqqhr2"
 
 -- Each target is one group of game text that gets its own font and size.

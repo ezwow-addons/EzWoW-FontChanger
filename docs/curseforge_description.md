@@ -30,7 +30,7 @@ Change the font and size of five parts of WoW Forever separately: the game UI, c
 ### More settings
 - **Per-language mix**: pick a font for Latin, Korean, Simplified Chinese, Traditional Chinese and Russian letters; every character is drawn with the font of its language. One button sets chat and UI to the mix and names above heads to EzWoW World Sans.
 - **Font test**: samples in 7 languages drawn with an area's font, with *All shown / Partly / Missing* for each, plus a box to type a name and check it.
-- **Your own fonts**: put them in `Interface/AddOns/EzWoW-MyFonts/` (kept through updates). `font1.ttf`–`font30.ttf` are found automatically, other names can be typed in. Fonts other addons register in the common font list show up too.
+- **Your own fonts**: put them in `_forever_/Interface/AddOns/EzWoW-MyFonts/` (kept through updates). `font1.ttf`–`font30.ttf` are found automatically, other names can be typed in. Fonts other addons register in the common font list show up too.
 
 ### Easy to use
 - Settings window languages: Automatic, English, 한국어, Deutsch, Français, Español, Русский, 简体中文, 繁體中文.
@@ -80,7 +80,7 @@ WoW Forever의 게임 화면을 다섯 영역(게임 UI, 채팅창, 툴팁, 전�
 ### 추가 설정
 - **언어별 조합**: 영어·유럽 문자, 한글, 중국어 간체, 중국어 번체, 러시아어마다 글꼴을 고르면 글자마다 그 언어의 글꼴로 그립니다. 단추 하나로 채팅·UI는 언어별 조합, 머리 위 이름은 EzWoW World Sans로 맞출 수 있습니다.
 - **글꼴 테스트**: 7개 언어 예문을 영역의 글꼴로 그려 보고 언어마다 "모두 표시 / 일부만 / 글자 없음"을 알려 줍니다. 깨져 보였던 이름을 직접 입력해 확인할 수도 있습니다.
-- **내 글꼴**: `Interface/AddOns/EzWoW-MyFonts/` 폴더에 넣으면 업데이트해도 지워지지 않습니다. `font1.ttf`~`font30.ttf`는 자동으로 인식되고, 다른 이름은 입력해서 추가합니다. 다른 애드온이 공용 글꼴 목록에 등록한 글꼴도 함께 나옵니다.
+- **내 글꼴**: `_forever_/Interface/AddOns/EzWoW-MyFonts/` 폴더에 넣으면 업데이트해도 지워지지 않습니다. `font1.ttf`~`font30.ttf`는 자동으로 인식되고, 다른 이름은 입력해서 추가합니다. 다른 애드온이 공용 글꼴 목록에 등록한 글꼴도 함께 나옵니다.
 
 ### 편의 기능
 - 설정창 언어: 자동, 한국어, English, Deutsch, Français, Español, Русский, 简体中文, 繁體中文.

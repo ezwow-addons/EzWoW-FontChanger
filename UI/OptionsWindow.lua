@@ -460,7 +460,8 @@ function SettingsDialog.addCustomFont(text)
         end
     end
     if not ns:IsFontFileUsable(ns:CustomFontPath(file)) then
-        ns:Print(string.format(ns:L("MSG_CUSTOM_FAIL"), ns:CustomFontPath(file)))
+        -- (the path the game looks in is inside the WoW Forever folder)
+        ns:Print(string.format(ns:L("MSG_CUSTOM_FAIL"), ns.GAME_FOLDER .. ns:CustomFontPath(file)))
         return
     end
     table.insert(ns.db.customFonts, { file = file })
