@@ -9,7 +9,7 @@ CurseForge summary (KO): 게임 UI·채팅·툴팁·전투 숫자·이름표의 
 
 Change the font and size of five parts of WoW Forever separately: the game UI, chat, tooltips, combat numbers, and nameplates / names above heads. The 22 bundled fonts each contain Hangul, Latin, Cyrillic, Greek, kana and the everyday Han characters, so **names and chat from other regions no longer show as boxes (□)**.
 
-![Settings window](https://raw.githubusercontent.com/qqhrqqhr2/EzWoW-FontChanger/master/docs/images/ui_en.png)
+![Settings window](https://raw.githubusercontent.com/ezwow-addons/EzWoW-FontChanger/master/docs/images/ui_en.png)
 
 *In-game screenshots with the addon set to English. The game client is Korean, so game text such as zone, item and spell names stays Korean. Character and player names and chat text are blurred.*
 
@@ -59,7 +59,7 @@ After updating the addon or adding font files, **restart the game completely**; 
 
 WoW Forever의 게임 화면을 다섯 영역(게임 UI, 채팅창, 툴팁, 전투 숫자, 이름표·머리 위 이름)으로 나눠 각각 글꼴과 크기를 바꾸는 애드온입니다. 기본 글꼴 22종은 모두 한글·영어·러시아어·그리스어·일본어와 자주 쓰는 한자를 담고 있어서 **다른 나라 플레이어의 이름과 채팅이 상자(□)로 깨지지 않습니다.**
 
-![설정창](https://raw.githubusercontent.com/qqhrqqhr2/EzWoW-FontChanger/master/docs/images/ui_ko.png)
+![설정창](https://raw.githubusercontent.com/ezwow-addons/EzWoW-FontChanger/master/docs/images/ui_ko.png)
 
 *실제 게임 화면입니다(WoW Forever, 한국어 클라이언트). 캐릭터 · 다른 플레이어 이름과 채팅 내용은 가렸습니다.*
 
