@@ -105,6 +105,37 @@ function FontApplier.setChatFont(chatFrame, path, size, flags)
     end
 end
 
+-- The size the game saved for a chat window (the one picked in its tab menu); nil when none was ever picked
+function FontApplier.savedChatSize(chatFrame)
+    local id = chatFrame and chatFrame.GetID and chatFrame:GetID()
+    if type(id) ~= "number" or id < 1 or type(GetChatWindowInfo) ~= "function" then return nil end
+    local ok, _, size = pcall(GetChatWindowInfo, id)
+    size = ok and tonumber(size) or nil
+    return (size and size > 0) and size or nil
+end
+
+-- 2026-11-29 (CurseForge report: chat text grew back after every reload although the chat font was never
+-- changed here): ChatFontNormal inherits NumberFont_Shadow_Med, a UI font, so scaling the UI fonts made chat
+-- bigger than the size picked in the chat tab. Every chat window keeps the size the game saved for it.
+function FontApplier.keepChatSizes()
+    for _, chatFrame in ipairs(FontApplier.chatFrames()) do
+        local want = chatFrame and chatFrame.GetFont and FontApplier.savedChatSize(chatFrame)
+        if want then
+            local path, size, flags = chatFrame:GetFont()
+            if path and size and math.abs(size - want) > 0.5 then FontApplier.setChatFont(chatFrame, path, want, flags) end
+        end
+    end
+end
+
+-- Chat font objects are remembered before the UI fonts change (they inherit UI fonts), so applying the chat
+-- target sets them back to their own size even when the chat font is the game's
+function FontApplier.rememberChatObjects()
+    if not objectsByTarget then FontApplier.collectFontObjects() end
+    for _, fontObject in ipairs(objectsByTarget.chat or {}) do
+        if not originalFonts[fontObject] then pcall(FontApplier.remember, fontObject) end
+    end
+end
+
 -- Chat frames keep the size the player picked in the chat tab menu
 function FontApplier.applyToChatFrame(chatFrame, entry)
     if not (chatFrame and chatFrame.GetFont and chatFrame.SetFont) then return end
@@ -112,7 +143,8 @@ function FontApplier.applyToChatFrame(chatFrame, entry)
     local saved = FontApplier.remember(chatFrame)
     if not saved then return end
     local _, currentSize, currentFlags = chatFrame:GetFont()
-    currentSize, currentFlags = currentSize or saved.size, currentFlags or saved.flags
+    currentSize = FontApplier.savedChatSize(chatFrame) or currentSize or saved.size
+    currentFlags = currentFlags or saved.flags
     if ns:UsesFamily(entry) then
         local family = ns:GetFamilyFont("chat", currentSize, currentFlags, entry)
         if family and ns:SetFontObjectKeepLook(chatFrame, family) then return end
@@ -327,6 +359,7 @@ function ns:ApplyTarget(targetKey)
         for _, chatFrame in ipairs(FontApplier.chatFrames()) do
             pcall(FontApplier.applyToChatFrame, chatFrame, entry)
         end
+        pcall(FontApplier.keepChatSizes)
         pcall(FontApplier.noteChatFonts)
     end
     if targetKey == "ui" or targetKey == "chat" then FontApplier.refreshChatInputs() end
@@ -335,6 +368,7 @@ function ns:ApplyTarget(targetKey)
 end
 
 function ns:ApplyAll()
+    FontApplier.rememberChatObjects()   -- before "ui" changes the UI fonts chat inherits from
     for _, targetKey in ipairs(self.TARGET_ORDER) do self:ApplyTarget(targetKey) end
 end
 
